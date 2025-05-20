@@ -3,16 +3,16 @@ require_once 'init.php';
 
 $nome = $_POST['nome'];
 $email = $_POST['email'];
-$cpf = $_POST['cpf'];
-$dataNascimento = $_POST['dataNascimento'];
+$endereco = $_POST['endereco'];
+$telefone = $_POST['telefone'];
 
 $PDO = db_connect();
-$sql = "INSERT INTO usuarios (nome, email, cpf, dataNascimento) VALUES (:nome, :email, :cpf, :dataNascimento)";
+$sql = "INSERT INTO Usuario (nome, email, endereco, telefone) VALUES (:nome, :email, :endereco, :telefone)";
 $stmt = $PDO->prepare($sql);
 $stmt->bindParam(':nome', $nome);
 $stmt->bindParam(':email', $email);
-$stmt->bindParam(':cpf', $cpf);
-$stmt->bindParam(':dataNascimento', $dataNascimento);
+$stmt->bindParam(':endereco', $endereco);
+$stmt->bindParam(':telefone', $telefone);
 
 if ($stmt->execute()) {
     header('Location: exibir.php');

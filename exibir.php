@@ -2,7 +2,7 @@
 require_once 'init.php';
 
 $PDO = db_connect();
-$sql = "SELECT id, nome, email, cpf, dataNascimento FROM usuarios ORDER BY nome ASC";
+$sql = "SELECT id, nome, email, endereco, telefone FROM Usuario ORDER BY nome ASC";
 $stmt = $PDO->prepare($sql);
 $stmt->execute();
 ?>
@@ -24,8 +24,8 @@ $stmt->execute();
                     <th>ID</th>
                     <th>Nome</th>
                     <th>Email</th>
-                    <th>CPF</th>
-                    <th>Data de Nascimento</th>
+                    <th>Endereço</th>
+                    <th>Telefone</th>
                     <th>Ações</th>
                 </tr>
             </thead>
@@ -35,10 +35,10 @@ $stmt->execute();
                     <td><?= $user['id'] ?></td>
                     <td><?= $user['nome'] ?></td>
                     <td><?= $user['email'] ?></td>
-                    <td><?= $user['cpf'] ?></td>
-                    <td><?= converteData($user['dataNascimento']) ?></td>
+                    <td><?= $user['endereco'] ?></td>
+                    <td><?= converteData($user['telefone']) ?></td>
                     <td>
-                        <a href="form-edit.php?id=<?= $user['id'] ?>" class="btn btn-primary">Editar</a>
+                        <a href="form_edit.php?id=<?= $user['id'] ?>" class="btn btn-primary">Editar</a>
                         <a href="deletar.php?id=<?= $user['id'] ?>" class="btn btn-danger" onclick="return confirm('Tem certeza de que deseja remover?')">Remover</a>
                     </td>
                 </tr>
