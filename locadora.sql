@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Tempo de geração: 21/05/2025 às 11:37
+-- Tempo de geração: 21/05/2025 às 18:35
 -- Versão do servidor: 8.0.41-0ubuntu0.22.04.1
 -- Versão do PHP: 8.3.16
 
@@ -47,6 +47,15 @@ CREATE TABLE `Fita` (
   `codigo_sessao` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Despejando dados para a tabela `Fita`
+--
+
+INSERT INTO `Fita` (`codigo`, `titulo`, `diretor`, `codigo_sessao`) VALUES
+(1, 'uhulllll', 'sararnha', 2),
+(2, 'uhulllll', 'sararnha', 2),
+(3, 'rockkkkkk', 'mauricio de souza', 3);
+
 -- --------------------------------------------------------
 
 --
@@ -75,7 +84,8 @@ CREATE TABLE `Sessao` (
 --
 
 INSERT INTO `Sessao` (`codigo`, `descricao`, `localizacao`) VALUES
-(2, 'Trash', 'Praeira 5');
+(2, 'Trash', 'Praeira 5'),
+(3, 'rock', 'prateleira 34');
 
 -- --------------------------------------------------------
 
@@ -100,7 +110,7 @@ INSERT INTO `Usuario` (`id`, `nome`, `email`, `endereco`, `telefone`) VALUES
 (5, 'alisson', 'alisssssonnn@gmail.com', 'rua alisson numero alisson', '359992382327'),
 (6, 'alisson', 'alisssssonnn@gmail.com', 'rua alisson numero alisson', '359992382327'),
 (7, 'alissson', 'alisson@alisson.com', 'alisson', '12134235346324'),
-(8, 'alissson', 'alisson@alisson.com', 'alisson', '12134235346324');
+(9, 'Sarahhhh', 'eliscsarah@gmail.com', 'rua dos cafes', '734724982749874');
 
 --
 -- Índices para tabelas despejadas
@@ -144,16 +154,22 @@ ALTER TABLE `Usuario`
 --
 
 --
+-- AUTO_INCREMENT de tabela `Fita`
+--
+ALTER TABLE `Fita`
+  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT de tabela `Sessao`
 --
 ALTER TABLE `Sessao`
-  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `Usuario`
 --
 ALTER TABLE `Usuario`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Restrições para tabelas despejadas
@@ -169,13 +185,12 @@ ALTER TABLE `Aluguel`
 -- Restrições para tabelas `Fita`
 --
 ALTER TABLE `Fita`
-  ADD CONSTRAINT `Fita_ibfk_1` FOREIGN KEY (`codigo`) REFERENCES `Sessao` (`codigo`);
+  ADD CONSTRAINT `Fita_ibfk_1` FOREIGN KEY (`codigo_sessao`) REFERENCES `Sessao` (`codigo`);
 
 --
 -- Restrições para tabelas `Fita_Aluguel`
 --
 ALTER TABLE `Fita_Aluguel`
-  ADD CONSTRAINT `Fita_Aluguel_ibfk_1` FOREIGN KEY (`codigo_fita`) REFERENCES `Fita` (`codigo`),
   ADD CONSTRAINT `Fita_Aluguel_ibfk_2` FOREIGN KEY (`codigo_aluguel`) REFERENCES `Aluguel` (`codigo`);
 COMMIT;
 
