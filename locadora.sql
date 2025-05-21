@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Tempo de geração: 20/05/2025 às 15:14
+-- Tempo de geração: 21/05/2025 às 11:37
 -- Versão do servidor: 8.0.41-0ubuntu0.22.04.1
 -- Versão do PHP: 8.3.16
 
@@ -70,6 +70,13 @@ CREATE TABLE `Sessao` (
   `localizacao` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Despejando dados para a tabela `Sessao`
+--
+
+INSERT INTO `Sessao` (`codigo`, `descricao`, `localizacao`) VALUES
+(2, 'Trash', 'Praeira 5');
+
 -- --------------------------------------------------------
 
 --
@@ -89,7 +96,11 @@ CREATE TABLE `Usuario` (
 --
 
 INSERT INTO `Usuario` (`id`, `nome`, `email`, `endereco`, `telefone`) VALUES
-(2, 'otavio', 'as@gmail.com', 'av dos imigrant', '359993434555');
+(4, 'alisson', 'alisssssonnn@gmail.com', 'rua alisson numero alisson', '359992382327'),
+(5, 'alisson', 'alisssssonnn@gmail.com', 'rua alisson numero alisson', '359992382327'),
+(6, 'alisson', 'alisssssonnn@gmail.com', 'rua alisson numero alisson', '359992382327'),
+(7, 'alissson', 'alisson@alisson.com', 'alisson', '12134235346324'),
+(8, 'alissson', 'alisson@alisson.com', 'alisson', '12134235346324');
 
 --
 -- Índices para tabelas despejadas
@@ -133,10 +144,16 @@ ALTER TABLE `Usuario`
 --
 
 --
+-- AUTO_INCREMENT de tabela `Sessao`
+--
+ALTER TABLE `Sessao`
+  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT de tabela `Usuario`
 --
 ALTER TABLE `Usuario`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Restrições para tabelas despejadas
@@ -152,7 +169,7 @@ ALTER TABLE `Aluguel`
 -- Restrições para tabelas `Fita`
 --
 ALTER TABLE `Fita`
-  ADD CONSTRAINT `Fita_ibfk_1` FOREIGN KEY (`codigo_sessao`) REFERENCES `Sessao` (`codigo`);
+  ADD CONSTRAINT `Fita_ibfk_1` FOREIGN KEY (`codigo`) REFERENCES `Sessao` (`codigo`);
 
 --
 -- Restrições para tabelas `Fita_Aluguel`

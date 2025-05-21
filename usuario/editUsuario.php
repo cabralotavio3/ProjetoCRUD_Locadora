@@ -1,10 +1,10 @@
 <?php
-require 'init.php';
+require '../init.php';
 
 $id = isset($_GET['id']) ? (int) $_GET['id'] : null;
 
 if (!$id) {
-    header('Location: exibir.php');
+    header('Location: exibirUsuarios.php');
     exit;
 }
 
@@ -16,7 +16,7 @@ $stmt->execute();
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$user) {
-    header('Location: exibir.php');
+    header('Location: exibirUsuarios.php');
     exit;
 }
 ?>
@@ -33,7 +33,7 @@ if (!$user) {
     <div class="jumbotron text-center">
         <p class="h4">Cadastro de Usuários</p>
     </div>
-    <form action="atualizar.php" method="post">
+    <form action="atualizarUsuario.php" method="post">
         <input type="hidden" name="id" value="<?php echo $id ?>">
         <div class="row">
             <div class="col-sm-6">

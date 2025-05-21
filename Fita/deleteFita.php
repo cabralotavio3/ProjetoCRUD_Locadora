@@ -9,7 +9,7 @@ if (empty($codigo)) {
 }
 
 $PDO = db_connect();
-$sql = "DELETE FROM Sessao WHERE codigo = :codigo";
+$sql = "DELETE FROM Fita WHERE codigo = :codigo";
 $stmt = $PDO->prepare($sql);
 $stmt->bindParam(':codigo', $codigo, PDO::PARAM_INT);
 

@@ -1,5 +1,5 @@
 <?php
-require_once 'init.php';
+require_once '../init.php';
 
 $id = isset($_GET['id']) ? $_GET['id'] : null;
 
@@ -14,7 +14,7 @@ $stmt = $PDO->prepare($sql);
 $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 
 if ($stmt->execute()) {
-    header('Location: exibir.php');
+    header('Location: exibirUsuarios.php');
 } else {
     echo "Erro ao remover";
     print_r($stmt->errorInfo());

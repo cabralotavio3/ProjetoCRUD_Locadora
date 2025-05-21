@@ -9,7 +9,7 @@ if (!$codigo) {
 }
 
 $PDO = db_connect();
-$sql = "SELECT descricao, localizacao FROM Sessao WHERE codigo = :codigo";
+$sql = "SELECT titulo, diretor FROM Fita WHERE codigo = :codigo";
 $stmt = $PDO->prepare($sql);
 $stmt->bindParam(':codigo', $codigo, PDO::PARAM_INT);
 $stmt->execute();
@@ -38,14 +38,14 @@ if (!$user) {
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="descricao">Descrição:</label>
-                    <input type="text" class="form-control" name="descricao" value="<?php echo $user['descricao'] ?>" required>
+                    <label for="titulo">Descrição:</label>
+                    <input type="text" class="form-control" name="titulo" value="<?php echo $user['titulo'] ?>" required>
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="localizacao">localizacao:</label>
-                    <input type="localizacao" class="form-control" name="localizacao" value="<?php echo $user['localizacao'] ?>" required>
+                    <label for="diretor">diretor:</label>
+                    <input type="diretor" class="form-control" name="diretor" value="<?php echo $user['diretor'] ?>" required>
                 </div>
             </div>
         </div>

@@ -2,7 +2,7 @@
 require_once '../init.php';
 
 $PDO = db_connect();
-$sql = "SELECT codigo, descricao, localizacao FROM Sessao ORDER BY descricao ASC";
+$sql = "SELECT codigo, titulo, diretor FROM Fita ORDER BY titulo ASC";
 $stmt = $PDO->prepare($sql);
 $stmt->execute();
 ?>
@@ -43,7 +43,7 @@ $stmt->execute();
                 <tr>
                     <th>Código</th>
                     <th>Descrição</th>
-                    <th>localizacao</th>
+                    <th>diretor</th>
                     <th>Ações</th>
                 </tr>
             </thead>
@@ -51,8 +51,8 @@ $stmt->execute();
                 <?php while ($user = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
                 <tr>
                     <td><?= $user['codigo'] ?></td>
-                    <td><?= $user['descricao'] ?></td>
-                    <td><?= $user['localizacao'] ?></td>
+                    <td><?= $user['titulo'] ?></td>
+                    <td><?= $user['diretor'] ?></td>
                     <td>
                         <a href="editSessao.php?codigo=<?= $user['codigo'] ?>" class="btn btn-primary">Editar</a>
                         <a href="deleteSessao.php?codigo=<?= $user['codigo'] ?>" class="btn btn-danger" onclick="return confirm('Tem certeza de que deseja remover?')">Remover</a>

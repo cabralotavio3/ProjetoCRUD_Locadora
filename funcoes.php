@@ -1,5 +1,4 @@
 <?php
-// Conecta com o MySQL usando PDO
 function db_connect() {
     try {
         $PDO = new PDO('mysql:host=localhost;dbname=locadora;charset=utf8', 'alunos', 'cefetmg');
