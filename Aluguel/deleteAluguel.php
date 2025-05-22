@@ -9,14 +9,20 @@ if (empty($codigo)) {
 }
 
 $PDO = db_connect();
-$sql = "DELETE FROM Fita WHERE codigo = :codigo";
-$stmt = $PDO->prepare($sql);
-$stmt->bindParam(':codigo', $codigo, PDO::PARAM_INT);
 
-if ($stmt->execute()) {
-    header('Location: exibirFita.php');
+$sql1 = "DELETE FROM Fita_Aluguel WHERE codigo_aluguel = :codigo";
+$stmt1 = $PDO->prepare($sql1);
+$stmt1->bindParam(':codigo', $codigo, PDO::PARAM_INT);
+$stmt1->execute();
+
+$sql2 = "DELETE FROM Aluguel WHERE codigo = :codigo";
+$stmt2 = $PDO->prepare($sql2);
+$stmt2->bindParam(':codigo', $codigo, PDO::PARAM_INT);
+
+if ($stmt2->execute()) {
+    header('Location: exibirAluguel.php');
 } else {
     echo "Erro ao remover";
-    print_r($stmt->errorInfo());
+    print_r($stmt2->errorInfo());
 }
 ?>

@@ -1,19 +1,31 @@
 <?php
 require_once '../init.php';
 
-$titulo = $_POST['titulo'];
-$diretor = $_POST['diretor'];
-$codigo_sessao = $_POST['codigo_sessao'];
+$id_usuario = $_POST['id_usuario'];
+$data_aluguel = $_POST['data_aluguel'];
+$data_devolucao = $_POST['data_devolucao'];
+$id_fita = $_POST['id_fita'];
 
 $PDO = db_connect();
-$sql = "INSERT INTO Fita (titulo, diretor, codigo_sessao) VALUES (:titulo, :diretor, :codigo_sessao)";
+
+$sql = "INSERT INTO Aluguel (data_hora, id_usuario, data_devolucao) 
+        VALUES (:data_hora, :id_usuario, :data_devolucao)";
 $stmt = $PDO->prepare($sql);
-$stmt->bindParam(':titulo', $titulo);
-$stmt->bindParam(':diretor', $diretor);
-$stmt->bindParam(':codigo_sessao', $codigo_sessao);
+$stmt->bindParam(':data_hora', $data_aluguel);
+$stmt->bindParam(':id_usuario', $id_usuario);
+$stmt->bindParam(':data_devolucao', $data_devolucao);
 
 if ($stmt->execute()) {
-    header('Location: exibirFita.php');
+    $codigo_aluguel = $PDO->lastInsertId();
+
+    $sqlFita = "INSERT INTO Fita_Aluguel (codigo_fita, codigo_aluguel) 
+                VALUES (:codigo_fita, :codigo_aluguel)";
+    $stmtFita = $PDO->prepare($sqlFita);
+    $stmtFita->bindParam(':codigo_fita', $id_fita);
+    $stmtFita->bindParam(':codigo_aluguel', $codigo_aluguel);
+    $stmtFita->execute();
+
+    header('Location: exibirAluguel.php');
 } else {
     echo "Erro ao cadastrar<br>";
     print_r($stmt->errorInfo());

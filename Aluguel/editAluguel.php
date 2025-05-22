@@ -4,19 +4,19 @@ require '../init.php';
 $codigo = isset($_GET['codigo']) ? (int) $_GET['codigo'] : null;
 
 if (!$codigo) {
-    header('Location: exibirFita.php');
+    header('Location: exibirAluguel.php');
     exit;
 }
 
 $PDO = db_connect();
-$sql = "SELECT titulo, diretor FROM Fita WHERE codigo = :codigo";
+$sql = "SELECT titulo, diretor FROM Aluguel WHERE codigo = :codigo";
 $stmt = $PDO->prepare($sql);
 $stmt->bindParam(':codigo', $codigo, PDO::PARAM_INT);
 $stmt->execute();
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$user) {
-    header('Location: exibirFita.php');
+    header('Location: exibirAluguel.php');
     exit;
 }
 ?>
@@ -31,9 +31,9 @@ if (!$user) {
 <body>
 <div class="container">
     <div class="jumbotron text-center">
-        <p class="h4">Cadastro de Fita</p>
+        <p class="h4">Cadastro de Aluguel</p>
     </div>
-    <form action="atualizarFita.php" method="post">
+    <form action="atualizarAluguel.php" method="post">
         <input type="hidden" name="codigo" value="<?php echo $codigo ?>">
         <div class="row">
             <div class="col-sm-6">

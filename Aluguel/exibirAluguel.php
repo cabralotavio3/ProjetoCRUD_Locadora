@@ -2,7 +2,7 @@
 require_once '../init.php';
 
 $PDO = db_connect();
-$sql = "SELECT codigo, titulo, diretor FROM Fita ORDER BY titulo ASC";
+$sql = "SELECT codigo, titulo, diretor FROM Aluguel ORDER BY titulo ASC";
 $stmt = $PDO->prepare($sql);
 $stmt->execute();
 ?>
@@ -24,7 +24,7 @@ $stmt->execute();
       });
     });
   </script>
-    <title>Exibir Fita</title>
+    <title>Exibir Aluguel</title>
 </head>
 <body>
 <h1>Menu de Dados</h1>
@@ -37,7 +37,7 @@ $stmt->execute();
 
 </div>
     <div class="container">
-        <h5 class="card-title" style="text-align:center">Fita Cadastradas</h5>
+        <h5 class="card-title" style="text-align:center">Aluguel Cadastradas</h5>
         <table class="table table-bordered table-hover">
             <thead>
                 <tr>
@@ -54,8 +54,8 @@ $stmt->execute();
                     <td><?= $user['titulo'] ?></td>
                     <td><?= $user['diretor'] ?></td>
                     <td>
-                        <a href="editFita.php?codigo=<?= $user['codigo'] ?>" class="btn btn-primary">Editar</a>
-                        <a href="deleteFita.php?codigo=<?= $user['codigo'] ?>" class="btn btn-danger" onclick="return confirm('Tem certeza de que deseja remover?')">Remover</a>
+                        <a href="editAluguel.php?codigo=<?= $user['codigo'] ?>" class="btn btn-primary">Editar</a>
+                        <a href="deleteAluguel.php?codigo=<?= $user['codigo'] ?>" class="btn btn-danger" onclick="return confirm('Tem certeza de que deseja remover?')">Remover</a>
                     </td>
                 </tr>
                 <?php endwhile; ?>
