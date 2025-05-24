@@ -2,7 +2,17 @@
 require_once '../init.php';
 
 $PDO = db_connect();
-$sql = "SELECT codigo, titulo, diretor FROM Aluguel ORDER BY titulo ASC";
+$sql = "SELECT 
+            A.codigo, 
+            A.titulo, 
+            A.diretor,
+            U.nome AS nome_usuario,
+            F.titulo AS nome_fita
+        FROM Aluguel A
+        LEFT JOIN Usuario U ON A.id_usuario = U.id
+        LEFT JOIN Fita_Aluguel FA ON A.codigo = FA.codigo_aluguel
+        LEFT JOIN Fita F ON FA.codigo_fita = F.codigo
+        ORDER BY A.titulo ASC";
 $stmt = $PDO->prepare($sql);
 $stmt->execute();
 ?>
@@ -14,53 +24,52 @@ $stmt->execute();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
     <link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
-  <script src="../bootstrap/js/popper.min.js"></script>
-  <script src="../bootstrap/js/bootstrap.js"></script>
-  <script src="../bootstrap/js/jquery.min.js"></script>
-  <script type="text/javascript">
-    $(document).ready(function () {
-      $(function () {
-        $("#menu").load("../navbar/navbar.html");
-      });
-    });
-  </script>
+    <script src="../bootstrap/js/popper.min.js"></script>
+    <script src="../bootstrap/js/bootstrap.js"></script>
+    <script src="../bootstrap/js/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#menu").load("../navbar/navbar.html");
+        });
+    </script>
     <title>Exibir Aluguel</title>
 </head>
 <body>
 <h1>Menu de Dados</h1>
 
-<div>
-  <div class="container">
-    <div id="menu">
-    </div>
-  </div>
+<div class="container">
+    <div id="menu"></div>
 
-</div>
-    <div class="container">
-        <h5 class="card-title" style="text-align:center">Aluguel Cadastradas</h5>
+    <div class="mt-4">
+        <h5 class="card-title text-center">Aluguéis Cadastrados</h5>
         <table class="table table-bordered table-hover">
             <thead>
                 <tr>
                     <th>Código</th>
                     <th>Descrição</th>
-                    <th>diretor</th>
+                    <th>Diretor</th>
+                    <th>Usuário</th>
+                    <th>Fita</th>
                     <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
-                <?php while ($user = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
+                <?php while ($aluguel = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
                 <tr>
-                    <td><?= $user['codigo'] ?></td>
-                    <td><?= $user['titulo'] ?></td>
-                    <td><?= $user['diretor'] ?></td>
+                    <td><?= $aluguel['codigo'] ?></td>
+                    <td><?= $aluguel['titulo'] ?></td>
+                    <td><?= $aluguel['diretor'] ?></td>
+                    <td><?= $aluguel['nome_usuario'] ?? 'N/A' ?></td>
+                    <td><?= $aluguel['nome_fita'] ?? 'N/A' ?></td>
                     <td>
-                        <a href="editAluguel.php?codigo=<?= $user['codigo'] ?>" class="btn btn-primary">Editar</a>
-                        <a href="deleteAluguel.php?codigo=<?= $user['codigo'] ?>" class="btn btn-danger" onclick="return confirm('Tem certeza de que deseja remover?')">Remover</a>
+                        <a href="editAluguel.php?codigo=<?= $aluguel['codigo'] ?>" class="btn btn-primary">Editar</a>
+                        <a href="deleteAluguel.php?codigo=<?= $aluguel['codigo'] ?>" class="btn btn-danger" onclick="return confirm('Tem certeza de que deseja remover?')">Remover</a>
                     </td>
                 </tr>
                 <?php endwhile; ?>
             </tbody>
         </table>
     </div>
+</div>
 </body>
 </html>
