@@ -10,7 +10,7 @@ SELECT
     Usuario.nome AS usuario,
     Fita.titulo AS fita,
     Sessao.descricao AS sessao,
-    Aluguel.data_aluguel,
+    Aluguel.data_hora,
     Aluguel.data_devolucao
 FROM Aluguel
 JOIN Usuario ON Aluguel.id_usuario = Usuario.id
@@ -21,7 +21,7 @@ WHERE
     Usuario.nome LIKE :busca OR
     Fita.titulo LIKE :busca OR
     Sessao.descricao LIKE :busca OR
-    Aluguel.data_aluguel LIKE :busca
+    Aluguel.data_hora LIKE :busca
 ORDER BY Aluguel.codigo DESC";
 
 $stmt = $PDO->prepare($sql);
@@ -68,7 +68,7 @@ $stmt->execute();
                     <td><?= $row['usuario'] ?></td>
                     <td><?= $row['fita'] ?></td>
                     <td><?= $row['sessao'] ?></td>
-                    <td><?= $row['data_aluguel'] ?></td>
+                    <td><?= $row['data_hora'] ?></td>
                     <td><?= $row['data_devolucao'] ?></td>
                 </tr>
             <?php endwhile; ?>

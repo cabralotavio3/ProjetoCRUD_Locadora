@@ -1,35 +1,53 @@
-<?php
-require_once '../init.php';
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Adicionar Aluguel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <h5 class="card-title text-center">Adicionar Novo Aluguel</h5>
+        <form action="formAddAluguel.php" method="POST" class="mt-4">
+            <div class="mb-3">
+                <label for="id_usuario" class="form-label">Usuário:</label>
+                <select name="id_usuario" id="id_usuario" class="form-select" required>
+                    <?php
+                    require_once '../init.php';
+                    $PDO = db_connect();
+                    $stmt = $PDO->query("SELECT id, nome FROM Usuario");
+                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        echo "<option value='{$row['id']}'>{$row['nome']}</option>";
+                    }
+                    ?>
+                </select>
+            </div>
 
-$id_usuario = $_POST['id_usuario'];
-$id_fita = $_POST['id_fita'];
-$id_sessao = $_POST['id_sessao'];
-$data_aluguel = $_POST['data_aluguel'];
-$data_devolucao = $_POST['data_devolucao'];
+            <div class="mb-3">
+                <label for="id_fita" class="form-label">Fita:</label>
+                <select name="id_fita" id="id_fita" class="form-select" required>
+                    <?php
+                    $stmt = $PDO->query("SELECT codigo, titulo FROM Fita");
+                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        echo "<option value='{$row['codigo']}'>{$row['titulo']}</option>";
+                    }
+                    ?>
+                </select>
+            </div>
 
-$PDO = db_connect();
+            <div class="mb-3">
+                <label for="data_aluguel" class="form-label">Data do Aluguel:</label>
+                <input type="date" name="data_aluguel" id="data_aluguel" class="form-control" required>
+            </div>
 
-$sql = "INSERT INTO Aluguel (id_usuario, id_sessao, data_aluguel, data_devolucao) 
-        VALUES (:id_usuario, :id_sessao, :data_aluguel, :data_devolucao)";
-$stmt = $PDO->prepare($sql);
-$stmt->bindParam(':id_usuario', $id_usuario);
-$stmt->bindParam(':id_sessao', $id_sessao);
-$stmt->bindParam(':data_aluguel', $data_aluguel);
-$stmt->bindParam(':data_devolucao', $data_devolucao);
+            <div class="mb-3">
+                <label for="data_devolucao" class="form-label">Data da Devolução:</label>
+                <input type="date" name="data_devolucao" id="data_devolucao" class="form-control" required>
+            </div>
 
-if ($stmt->execute()) {
-    $codigo_aluguel = $PDO->lastInsertId();
-
-    $sql_fita = "INSERT INTO Fita_Aluguel (codigo_aluguel, codigo_fita) 
-                 VALUES (:codigo_aluguel, :codigo_fita)";
-    $stmt_fita = $PDO->prepare($sql_fita);
-    $stmt_fita->bindParam(':codigo_aluguel', $codigo_aluguel);
-    $stmt_fita->bindParam(':codigo_fita', $id_fita);
-    $stmt_fita->execute();
-
-    header('Location: exibirAluguel.php');
-} else {
-    echo "Erro ao cadastrar<br>";
-    print_r($stmt->errorInfo());
-}
-?>
+            <input type="submit" value="Cadastrar" class="btn btn-primary">
+        </form>
+    </div>
+</body>
+</html>

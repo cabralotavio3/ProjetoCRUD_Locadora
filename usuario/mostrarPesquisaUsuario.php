@@ -18,6 +18,11 @@ $stmt->execute();
     <meta charset="UTF-8">
     <title>Resultado da Pesquisa - Usuário</title>
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#menu").load("../navbar/navbar.html");
+        });
+    </script>
 </head>
 <body>
 <div class="container mt-4">
