@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Tempo de geração: 21/05/2025 às 18:35
+-- Tempo de geração: 28/05/2025 às 13:36
 -- Versão do servidor: 8.0.41-0ubuntu0.22.04.1
 -- Versão do PHP: 8.3.16
 
@@ -29,10 +29,18 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `Aluguel` (
   `codigo` int NOT NULL,
-  `data_hora` datetime DEFAULT NULL,
+  `data_aluguel` datetime DEFAULT NULL,
   `id_usuario` int DEFAULT NULL,
   `data_devolucao` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Despejando dados para a tabela `Aluguel`
+--
+
+INSERT INTO `Aluguel` (`codigo`, `data_aluguel`, `id_usuario`, `data_devolucao`) VALUES
+(5, '2025-05-28 09:39:00', 10, '2025-05-30'),
+(13, '1212-12-12 12:12:00', 11, '4444-04-12');
 
 -- --------------------------------------------------------
 
@@ -52,9 +60,8 @@ CREATE TABLE `Fita` (
 --
 
 INSERT INTO `Fita` (`codigo`, `titulo`, `diretor`, `codigo_sessao`) VALUES
-(1, 'uhulllll', 'sararnha', 2),
-(2, 'uhulllll', 'sararnha', 2),
-(3, 'rockkkkkk', 'mauricio de souza', 3);
+(4, 'Persona', 'Ingmar Bergman', 4),
+(5, 'Up - Altas Aventuras', 'Tarantino', 5);
 
 -- --------------------------------------------------------
 
@@ -66,6 +73,14 @@ CREATE TABLE `Fita_Aluguel` (
   `codigo_fita` int NOT NULL,
   `codigo_aluguel` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Despejando dados para a tabela `Fita_Aluguel`
+--
+
+INSERT INTO `Fita_Aluguel` (`codigo_fita`, `codigo_aluguel`) VALUES
+(4, 5),
+(5, 13);
 
 -- --------------------------------------------------------
 
@@ -84,8 +99,9 @@ CREATE TABLE `Sessao` (
 --
 
 INSERT INTO `Sessao` (`codigo`, `descricao`, `localizacao`) VALUES
-(2, 'Trash', 'Praeira 5'),
-(3, 'rock', 'prateleira 34');
+(4, 'Drama', '13a'),
+(5, 'Aventura', '15a'),
+(6, 'Suspense', '13b');
 
 -- --------------------------------------------------------
 
@@ -106,11 +122,8 @@ CREATE TABLE `Usuario` (
 --
 
 INSERT INTO `Usuario` (`id`, `nome`, `email`, `endereco`, `telefone`) VALUES
-(4, 'alisson', 'alisssssonnn@gmail.com', 'rua alisson numero alisson', '359992382327'),
-(5, 'alisson', 'alisssssonnn@gmail.com', 'rua alisson numero alisson', '359992382327'),
-(6, 'alisson', 'alisssssonnn@gmail.com', 'rua alisson numero alisson', '359992382327'),
-(7, 'alissson', 'alisson@alisson.com', 'alisson', '12134235346324'),
-(9, 'Sarahhhh', 'eliscsarah@gmail.com', 'rua dos cafes', '734724982749874');
+(10, 'Miguel Sousa', 'reversesousa@gmail.com', 'rua jose charles', '359993837723737'),
+(11, 'Otávio Cabral', 'otavio@gmail.com', 'rua charlinhas', '3485474747845');
 
 --
 -- Índices para tabelas despejadas
@@ -154,22 +167,28 @@ ALTER TABLE `Usuario`
 --
 
 --
+-- AUTO_INCREMENT de tabela `Aluguel`
+--
+ALTER TABLE `Aluguel`
+  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
 -- AUTO_INCREMENT de tabela `Fita`
 --
 ALTER TABLE `Fita`
-  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `Sessao`
 --
 ALTER TABLE `Sessao`
-  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de tabela `Usuario`
 --
 ALTER TABLE `Usuario`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Restrições para tabelas despejadas

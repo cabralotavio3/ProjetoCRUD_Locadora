@@ -16,18 +16,26 @@ $stmt->execute();
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Resultado da Pesquisa - Usuário</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
+    <script src="../bootstrap/js/popper.min.js"></script>
+    <script src="../bootstrap/js/bootstrap.js"></script>
+    <script src="../bootstrap/js/jquery.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $("#menu").load("../navbar/navbar.html");
         });
     </script>
+    <title>Resultado da Pesquisa - Usuário</title>
 </head>
 <body>
+<div id="menu"></div>
+
 <div class="container mt-4">
-    <h5 class="card-title text-center">Resultado da Pesquisa - Usuário</h5>
-    <table class="table table-bordered table-hover">
+    <h5 class="card-title text-center">Resultado da Pesquisa: "<?php echo htmlspecialchars($busca); ?>"</h5>
+
+    <table class="table table-bordered table-hover mt-4">
         <thead>
             <tr>
                 <th>ID</th>
@@ -45,6 +53,10 @@ $stmt->execute();
             <?php endwhile; ?>
         </tbody>
     </table>
+
+    <div class="text-center">
+        <a href="pesquisarUsuario.html" class="btn btn-secondary">Nova Pesquisa</a>
+    </div>
 </div>
 </body>
 </html>

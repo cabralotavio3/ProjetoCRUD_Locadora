@@ -43,9 +43,9 @@ $codigo_fita = $fita ? $fita['codigo_fita'] : '';
         <input type="hidden" name="codigo" value="<?php echo $codigo ?>">
 
         <div class="mb-3">
-            <label for="data_hora" class="form-label">Data:</label>
-            <input type="date" name="data_hora" id="data_hora" class="form-control"
-                   value="<?php echo date('Y-m-d', strtotime($aluguel['data_hora'])) ?>" required>
+            <label for="data_aluguel" class="form-label">Data:</label>
+            <input type="date" name="data_aluguel" id="data_aluguel" class="form-control"
+                   value="<?php echo date('Y-m-d', strtotime($aluguel['data_aluguel'])) ?>" required>
         </div>
 
         <div class="mb-3">

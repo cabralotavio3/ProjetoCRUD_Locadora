@@ -10,19 +10,20 @@ SELECT
     Usuario.nome AS usuario,
     Fita.titulo AS fita,
     Sessao.descricao AS sessao,
-    Aluguel.data_hora,
+    Aluguel.data_aluguel,
     Aluguel.data_devolucao
 FROM Aluguel
 JOIN Usuario ON Aluguel.id_usuario = Usuario.id
-JOIN Sessao ON Aluguel.id_sessao = Sessao.codigo
 JOIN Fita_Aluguel ON Aluguel.codigo = Fita_Aluguel.codigo_aluguel
 JOIN Fita ON Fita_Aluguel.codigo_fita = Fita.codigo
+JOIN Sessao ON Fita.codigo_sessao = Sessao.codigo
 WHERE 
     Usuario.nome LIKE :busca OR
     Fita.titulo LIKE :busca OR
     Sessao.descricao LIKE :busca OR
-    Aluguel.data_hora LIKE :busca
-ORDER BY Aluguel.codigo DESC";
+    Aluguel.data_aluguel LIKE :busca
+ORDER BY Aluguel.codigo DESC
+";
 
 $stmt = $PDO->prepare($sql);
 $busca_param = "%" . $busca . "%";
@@ -48,6 +49,7 @@ $stmt->execute();
     <title>Exibir Aluguel</title>
 </head>
 <body>
+<div id="menu"></div>
 <div class="container mt-4">
     <h5 class="card-title text-center">Resultado da Pesquisa: "<?php echo htmlspecialchars($busca); ?>"</h5>
     <table class="table table-bordered table-hover mt-4">
@@ -64,12 +66,12 @@ $stmt->execute();
         <tbody>
             <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
                 <tr>
-                    <td><?= $row['codigo'] ?></td>
-                    <td><?= $row['usuario'] ?></td>
-                    <td><?= $row['fita'] ?></td>
-                    <td><?= $row['sessao'] ?></td>
-                    <td><?= $row['data_hora'] ?></td>
-                    <td><?= $row['data_devolucao'] ?></td>
+                    <td><?= ($row['codigo']) ?></td>
+                    <td><?= ($row['usuario']) ?></td>
+                    <td><?= ($row['fita']) ?></td>
+                    <td><?= ($row['sessao']) ?></td>
+                    <td><?= ($row['data_aluguel']) ?></td>
+                    <td><?= ($row['data_devolucao']) ?></td>
                 </tr>
             <?php endwhile; ?>
         </tbody>

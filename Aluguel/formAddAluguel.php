@@ -9,7 +9,7 @@
 <body>
     <div class="container mt-4">
         <h5 class="card-title text-center">Adicionar Novo Aluguel</h5>
-        <form action="formAddAluguel.php" method="POST" class="mt-4">
+        <form action="addAluguel.php" method="POST" class="mt-4">
             <div class="mb-3">
                 <label for="id_usuario" class="form-label">Usuário:</label>
                 <select name="id_usuario" id="id_usuario" class="form-select" required>
@@ -38,7 +38,7 @@
 
             <div class="mb-3">
                 <label for="data_aluguel" class="form-label">Data do Aluguel:</label>
-                <input type="date" name="data_aluguel" id="data_aluguel" class="form-control" required>
+                <input type="datetime-local" name="data_aluguel" id="data_aluguel" class="form-control" required>
             </div>
 
             <div class="mb-3">

@@ -33,10 +33,16 @@ if ($stmt->execute()) {
     $stmtFita = $PDO->prepare($sqlFita);
     $stmtFita->bindParam(':codigo_aluguel', $codigo_aluguel);
     $stmtFita->bindParam(':codigo_fita', $id_fita);
-    $stmtFita->execute();
-    if ($stmt->execute()) {
+
+    if ($stmtFita->execute()) {
         header('Location: exibirAluguel.php');
+        exit;
+    } else {
+        echo "Erro ao inserir fita no aluguel.<br>";
+        print_r($stmtFita->errorInfo());
+    }
 } else {
     echo "Erro ao cadastrar aluguel.<br>";
     print_r($stmt->errorInfo());
 }
+?>

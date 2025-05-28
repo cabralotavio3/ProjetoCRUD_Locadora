@@ -26,8 +26,8 @@ $stmt->execute();
   </script>
     <title>Exibir Usuários</title>
 </head>
-<body>
-<h1>Menu de Dados</h1>
+<body style="font-family: sans-serif; text-align: center; margin-top: 50px;">
+
 
 <div>
   <div class="container">

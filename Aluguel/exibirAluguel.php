@@ -5,14 +5,16 @@ $PDO = db_connect();
 $sql = "SELECT 
             A.codigo, 
             U.nome AS nome_usuario,
-            F.titulo AS nome_fita,
-            A.data_hora,
+            GROUP_CONCAT(F.titulo SEPARATOR ', ') AS nome_fita,
+            A.data_aluguel,
             A.data_devolucao
         FROM Aluguel A
         LEFT JOIN Usuario U ON A.id_usuario = U.id
         LEFT JOIN Fita_Aluguel FA ON A.codigo = FA.codigo_aluguel
         LEFT JOIN Fita F ON FA.codigo_fita = F.codigo
+        GROUP BY A.codigo
         ORDER BY A.codigo DESC";
+
 $stmt = $PDO->prepare($sql);
 $stmt->execute();
 ?>
@@ -34,7 +36,7 @@ $stmt->execute();
     </script>
     <title>Exibir Aluguel</title>
 </head>
-<body>
+<body style="font-family: sans-serif; text-align: center; margin-top: 50px; ">
 <div class="container">
     <div id="menu"></div>
 
@@ -55,9 +57,9 @@ $stmt->execute();
                 <?php while ($aluguel = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
                 <tr>
                     <td><?= $aluguel['codigo'] ?></td>
-                    <td><?= $aluguel['nome_usuario'] ?? 'N/A' ?></td>
-                    <td><?= $aluguel['nome_fita'] ?? 'N/A' ?></td>
-                    <td><?= $aluguel['data_hora'] ?></td>
+                    <td><?= $aluguel['nome_usuario'] ?></td>
+                    <td><?= $aluguel['nome_fita'] ?></td>
+                    <td><?= $aluguel['data_aluguel'] ?></td>
                     <td><?= $aluguel['data_devolucao'] ?></td>
                     <td>
                         <a href="editAluguel.php?codigo=<?= $aluguel['codigo'] ?>" class="btn btn-primary">Editar</a>

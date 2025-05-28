@@ -3,7 +3,7 @@ require_once '../init.php';
 
 $id = isset($_GET['id']) ? $_GET['id'] : null;
 
-if (empty($id)) {
+if (!($id)) {
     echo "ID não informado";
     exit;
 }

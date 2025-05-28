@@ -30,12 +30,15 @@ $stmt->execute();
             $("#menu").load("../navbar/navbar.html");
         });
     </script>
-    <title>Exibir Aluguel</title>
+    <title>Resultado da Pesquisa - Fita</title>
 </head>
 <body>
+<div id="menu"></div>
+
 <div class="container mt-4">
-    <h5 class="card-title text-center">Resultado da Pesquisa - Fita</h5>
-    <table class="table table-bordered table-hover">
+    <h5 class="card-title text-center">Resultado da Pesquisa: "<?php echo htmlspecialchars($busca); ?>"</h5>
+
+    <table class="table table-bordered table-hover mt-4">
         <thead>
             <tr>
                 <th>Código</th>
@@ -53,6 +56,10 @@ $stmt->execute();
             <?php endwhile; ?>
         </tbody>
     </table>
+
+    <div class="text-center">
+        <a href="pesquisarFita.html" class="btn btn-secondary">Nova Pesquisa</a>
+    </div>
 </div>
 </body>
 </html>
